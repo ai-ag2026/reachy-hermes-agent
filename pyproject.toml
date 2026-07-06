@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reachy-hermes-agent"
+version = "0.1.0"
+description = "Embody a Hermes agent (or any OpenAI-compatible backend) in the Reachy Mini robot: voice pipeline, body/vision/movement policies, and neutral no-hardware runtime primitives. Imported as `reachy_agent`."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0 OR MIT" }
+authors = [{ name = "Reachy community contributors" }]
+keywords = ["reachy", "robotics", "agent", "voice", "runtime", "safety"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "httpx>=0.27",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=3.7",
+    "pytest>=8",
+    "ruff>=0.8",
+]
+# In-receive() STT front-end (reachy_agent.voice): Silero VAD v5 ONNX runtime + the sync
+# WebSocket client for the Nemotron streaming-ASR mode (AGENT_STT_MODE=stream).
+voice = ["onnxruntime>=1.20", "websocket-client>=1.7"]
+# Robot/simulator extra for live hardware.
+robot = ["reachy-mini[mujoco]>=1.8.3,<1.9"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["reachy_agent*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

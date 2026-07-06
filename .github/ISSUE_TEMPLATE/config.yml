@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: https://example.invalid/security-placeholder
+    about: Replace this placeholder with the chosen private security advisory path before publication.
+  - name: Questions and discussions
+    url: https://example.invalid/discussions-placeholder
+    about: Replace this placeholder with the chosen discussion forum before publication.

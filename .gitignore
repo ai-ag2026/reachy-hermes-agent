@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local/runtime artifacts
+.env
+*.local
+reports/
+runs/
+artifacts/tmp/
+.DS_Store
+reports/
+
+# Python build artifacts
+*.egg-info/
+ROLLBACK.md

@@ -1,0 +1,73 @@
+name: Bug report
+description: Report a problem in the no-hardware runtime or optional adapters.
+title: "bug: "
+labels: [bug, needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Do not include secrets, private hosts, raw transcripts, images, audio, or robot credentials.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Which package version or commit did you test?
+      placeholder: "0.1.0 or commit SHA"
+    validations:
+      required: true
+  - type: dropdown
+    id: hardware
+    attributes:
+      label: Was live hardware involved?
+      options:
+        - No, fake/no-hardware only
+        - Yes, live robot involved
+        - Unsure
+    validations:
+      required: true
+  - type: dropdown
+    id: side_effect
+    attributes:
+      label: Could the issue cause a robot-side effect?
+      options:
+        - No side effect expected
+        - Movement
+        - Sound or speaker output
+        - Camera access
+        - Microphone access
+        - Robot daemon or persistent state change
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What went wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Prefer fake/no-hardware reproduction steps.
+      placeholder: |
+        1. Install package
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected safe behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs or test output
+      description: Remove secrets, private hosts, transcripts, images, audio, and credentials.
+      render: shell
+    validations:
+      required: false

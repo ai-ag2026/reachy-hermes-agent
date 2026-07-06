@@ -1,0 +1,53 @@
+name: Feature request
+description: Propose a no-hardware runtime, adapter, or documentation improvement.
+title: "feat: "
+labels: [enhancement, needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please keep proposals small and explicit about safety defaults.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user or developer problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the smallest useful change.
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - Core no-hardware runtime
+        - Mock controller or tests
+        - Optional daemon adapter
+        - Optional agent adapter
+        - Documentation or examples
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: hardware_default
+    attributes:
+      label: Does this require live hardware by default?
+      options:
+        - No
+        - Yes
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety defaults and tests
+      description: Which default-safe behavior and fake/no-hardware tests should cover this?
+    validations:
+      required: true

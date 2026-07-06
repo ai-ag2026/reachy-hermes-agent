@@ -1,0 +1,28 @@
+# Write-time drift gate (template). Scope: ruff lints/formats only staged files;
+# jscpd guards against new copy-paste duplication (set threshold above the repo's
+# measured baseline). Enforces the repo's AGENTS.md.
+#
+# Setup once:  pre-commit install
+# Bypass (rare, justify): git commit --no-verify
+
+minimum_pre_commit_version: "3.5.0"
+default_install_hook_types: [pre-commit]
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.13   # keep in sync with the CI workflow + fleet scan
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: jscpd
+        name: jscpd duplication guard (src/)
+        entry: jscpd
+        args: ["--config", ".jscpd.json"]
+        language: node
+        additional_dependencies: ["jscpd@4"]
+        pass_filenames: false
+        files: \.py$
