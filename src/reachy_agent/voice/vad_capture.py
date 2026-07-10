@@ -47,9 +47,20 @@ class VAD:
         if "CoreMLExecutionProvider" in providers:
             providers.remove("CoreMLExecutionProvider")
 
+        # Default SessionOptions spawn an intra-op thread pool whose workers spin-wait
+        # between inferences. Fed a chunk every ~32ms, they never get to park, which can
+        # burn well over 100% CPU on low-power ARM boards. Silero-VAD is a tiny
+        # single-threaded model (well under 1ms per chunk), so multi-threading buys
+        # nothing here: pin everything to one sequential thread and forbid spinning.
+        sess_options = ort.SessionOptions()
+        sess_options.intra_op_num_threads = 1
+        sess_options.inter_op_num_threads = 1
+        sess_options.execution_mode = ort.ExecutionMode.ORT_SEQUENTIAL
+        sess_options.add_session_config_entry("session.intra_op.allow_spinning", "0")
+
         self.ort_sess = ort.InferenceSession(
             str(model_path),
-            sess_options=ort.SessionOptions(),
+            sess_options=sess_options,
             providers=providers,
         )
 
