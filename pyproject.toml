@@ -34,7 +34,7 @@ dev = [
 # WebSocket client for the Nemotron streaming-ASR mode (AGENT_STT_MODE=stream).
 voice = ["onnxruntime>=1.20", "websocket-client>=1.7"]
 # Robot/simulator extra for live hardware.
-robot = ["reachy-mini[mujoco]>=1.8.3,<1.9"]
+robot = ["reachy-mini[mujoco]>=1.8.3,<1.10"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
