@@ -17,4 +17,5 @@ reports/
 
 # Python build artifacts
 *.egg-info/
+build/
 ROLLBACK.md
